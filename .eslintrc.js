@@ -12,6 +12,9 @@ module.exports = {
       jsx: true,
       ecmaVersion: 2018,
       sourceType: 'module',
+      ecmaFeatures: {
+        experimentalObjectRestSpread: true
+      }
     },
     plugins: ['@typescript-eslint'],
     rules: {
@@ -19,8 +22,10 @@ module.exports = {
       'import/first': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'error',
-      camelcase: 'off',
+      'camelcase': 'off',
+      'eol-last': ['error', 'always'],
+      'array-bracket-newline': ["error", "always"],
+      'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 1 }],
+      'no-trailing-spaces': ["error", { "skipBlankLines": false }]
     },
-    
   }
-  
