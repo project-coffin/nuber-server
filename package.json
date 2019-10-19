@@ -7,9 +7,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts -e ts,graphql",
-    "lint": "eslint src --fix"
+    "lint": "eslint src/app.ts"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/helmet": "^0.0.44",
+    "@types/morgan": "^1.7.37",
     "@types/node": "^12.7.12",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
@@ -25,5 +28,17 @@
     "prettier": "^1.18.2",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "graphql-yoga": "^1.18.3",
+    "helmet": "^3.21.1",
+    "morgan": "^1.9.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "plugin:prettier/recommended"
+    ]
   }
 }
