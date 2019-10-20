@@ -12,7 +12,7 @@ const appOptions: Options = {
 }
 
 const handleAppStart = () => {
-  console.log(`🚀 listen on port http://localhost:${PORT}`)
+  console.log(`🚀 listen on port http://localhost:${PORT}/playground`)
 }
 
 app.start(appOptions, handleAppStart);
