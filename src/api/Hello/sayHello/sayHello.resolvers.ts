@@ -1,9 +1,8 @@
-import { Greeting } from "types/graph"
-import { QuerysayHelloArgs } from "generated/graphql"
+import { QuerysayHelloArgs, SayHelloPayload } from "generated/graphql"
 
 const resolvers = {
   Query: {
-    sayHello: (_, args: QuerysayHelloArgs): Greeting => { 
+    sayHello: (_, args: QuerysayHelloArgs): SayHelloPayload => { 
       const { name } = args
       return {
         text: `Hello ${name}, how are you?`,

@@ -10,20 +10,20 @@ export type Scalars = {
   Float: number,
 };
 
-export type Greeting = {
-   __typename?: 'Greeting',
-  text: Scalars['String'],
-  error: Scalars['Boolean'],
-};
-
 export type Query = {
    __typename?: 'Query',
-  sayHello: Greeting,
+  sayHello: SayHelloPayload,
 };
 
 
 export type QuerysayHelloArgs = {
   name: Scalars['String']
+};
+
+export type SayHelloPayload = {
+   __typename?: 'SayHelloPayload',
+  text: Scalars['String'],
+  error: Scalars['Boolean'],
 };
 
 
@@ -99,7 +99,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>,
   String: ResolverTypeWrapper<Scalars['String']>,
-  Greeting: ResolverTypeWrapper<Greeting>,
+  SayHelloPayload: ResolverTypeWrapper<SayHelloPayload>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
 };
 
@@ -107,22 +107,22 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Query: {},
   String: Scalars['String'],
-  Greeting: Greeting,
+  SayHelloPayload: SayHelloPayload,
   Boolean: Scalars['Boolean'],
 };
 
-export type GreetingResolvers<ContextType = any, ParentType extends ResolversParentTypes['Greeting'] = ResolversParentTypes['Greeting']> = {
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  sayHello?: Resolver<ResolversTypes['SayHelloPayload'], ParentType, ContextType, RequireFields<QuerysayHelloArgs, 'name'>>,
+};
+
+export type SayHelloPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['SayHelloPayload'] = ResolversParentTypes['SayHelloPayload']> = {
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   error?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  sayHello?: Resolver<ResolversTypes['Greeting'], ParentType, ContextType, RequireFields<QuerysayHelloArgs, 'name'>>,
-};
-
 export type Resolvers<ContextType = any> = {
-  Greeting?: GreetingResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
+  SayHelloPayload?: SayHelloPayloadResolvers<ContextType>,
 };
 
 
