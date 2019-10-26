@@ -35,7 +35,9 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
+    "class-validator": "^0.10.2",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "graphql": "^14.5.8",
     "graphql-tools": "^4.0.5",
     "graphql-yoga": "^1.18.3",

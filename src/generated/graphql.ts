@@ -1,6 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
-export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -12,18 +11,30 @@ export type Scalars = {
 
 export type Query = {
    __typename?: 'Query',
-  sayHello: SayHelloPayload,
+  user?: Maybe<User>,
 };
 
-
-export type QuerysayHelloArgs = {
-  name: Scalars['String']
-};
-
-export type SayHelloPayload = {
-   __typename?: 'SayHelloPayload',
-  text: Scalars['String'],
-  error: Scalars['Boolean'],
+export type User = {
+   __typename?: 'User',
+  id: Scalars['Int'],
+  password: Scalars['String'],
+  age?: Maybe<Scalars['Int']>,
+  firstName: Scalars['String'],
+  lastName: Scalars['String'],
+  fullName?: Maybe<Scalars['String']>,
+  profilePhoto?: Maybe<Scalars['String']>,
+  email?: Maybe<Scalars['String']>,
+  phoneNumber: Scalars['String'],
+  verifiedByEmail: Scalars['Boolean'],
+  verfiedByPhoneNumber: Scalars['Boolean'],
+  isDriving: Scalars['Boolean'],
+  isRiding: Scalars['Boolean'],
+  isTaken: Scalars['Boolean'],
+  lastLng?: Maybe<Scalars['Float']>,
+  lastLat?: Maybe<Scalars['Float']>,
+  lastOrientation?: Maybe<Scalars['Float']>,
+  createdAt: Scalars['String'],
+  updatedAt?: Maybe<Scalars['String']>,
 };
 
 
@@ -98,31 +109,52 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>,
+  User: ResolverTypeWrapper<User>,
+  Int: ResolverTypeWrapper<Scalars['Int']>,
   String: ResolverTypeWrapper<Scalars['String']>,
-  SayHelloPayload: ResolverTypeWrapper<SayHelloPayload>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
+  Float: ResolverTypeWrapper<Scalars['Float']>,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Query: {},
+  User: User,
+  Int: Scalars['Int'],
   String: Scalars['String'],
-  SayHelloPayload: SayHelloPayload,
   Boolean: Scalars['Boolean'],
+  Float: Scalars['Float'],
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  sayHello?: Resolver<ResolversTypes['SayHelloPayload'], ParentType, ContextType, RequireFields<QuerysayHelloArgs, 'name'>>,
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
 };
 
-export type SayHelloPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['SayHelloPayload'] = ResolversParentTypes['SayHelloPayload']> = {
-  text?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  error?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>,
+  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  fullName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  profilePhoto?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  verifiedByEmail?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  verfiedByPhoneNumber?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  isDriving?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  isRiding?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  isTaken?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  lastLng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
+  lastLat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
+  lastOrientation?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>,
-  SayHelloPayload?: SayHelloPayloadResolvers<ContextType>,
+  User?: UserResolvers<ContextType>,
 };
 
 

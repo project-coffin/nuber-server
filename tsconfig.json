@@ -19,6 +19,8 @@
       "preserveConstEnums": true,
       "sourceMap": true,
       "noImplicitAny": false,
+      "experimentalDecorators": true,
+      "strictPropertyInitialization": false,
       "plugins": [{
         "name": "typescript-styled-plugin"
       }],
