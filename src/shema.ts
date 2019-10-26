@@ -5,11 +5,11 @@ import {fileLoader, mergeResolvers, mergeTypes } from 'merge-graphql-schemas'
 import path from 'path'
 
 const allTypes: GraphQLSchema[] = fileLoader(
-  path.join(__dirname, './api-server/**/*.graphql')
+  path.join(__dirname, './api/**/*.graphql')
 )
 
 const allResolvers: any = fileLoader(
-  path.join(__dirname, './api-server/**/*.resolvers.*')
+  path.join(__dirname, './api/**/*.resolvers.*')
 )
 
 const mergedTypes = mergeTypes(allTypes)
