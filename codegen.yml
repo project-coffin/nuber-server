@@ -1,0 +1,13 @@
+overwrite: true
+schema: "./src/api/**/*.graphql"
+documents: null
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+      withHooks: true
+      namingConvention:
+            typeNames: keep
+

@@ -22,6 +22,7 @@ module.exports = {
       'import/first': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'error',
+      '@typescript-eslint/no-explicit-any': 'off', // allow any type
       'camelcase': 'off',
       'eol-last': ['error', 'always'],
       'array-bracket-newline': ["error", "always"],
