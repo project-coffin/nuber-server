@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import { IsEmail } from 'class-validator'
-import { BaseEntity, BeforeInsert, BeforeUpdate, CreateDateColumn, Column, Entity, PrimaryGeneratedColumn,  } from "typeorm";
+import { BaseEntity, BeforeInsert, BeforeUpdate, CreateDateColumn, Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 const BCRYPT_TIMES = 10
 
@@ -55,7 +55,7 @@ class User extends BaseEntity{
   lastOrientation: number
 
   @CreateDateColumn() createdAt: string
-  @CreateDateColumn() updatedAt: string
+  @UpdateDateColumn() updatedAt: string
 
   get fullName(): string{
     return `${this.firstName} ${this.lastName}`

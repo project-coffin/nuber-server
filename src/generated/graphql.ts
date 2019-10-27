@@ -37,6 +37,17 @@ export type User = {
   updatedAt?: Maybe<Scalars['String']>,
 };
 
+export type Verification = {
+   __typename?: 'Verification',
+  id: Scalars['Int'],
+  target: Scalars['String'],
+  payload: Scalars['String'],
+  used: Scalars['Boolean'],
+  key: Scalars['String'],
+  createdAt: Scalars['String'],
+  updatedAt: Scalars['String'],
+};
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -114,6 +125,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Float: ResolverTypeWrapper<Scalars['Float']>,
+  Verification: ResolverTypeWrapper<Verification>,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -124,6 +136,7 @@ export type ResolversParentTypes = {
   String: Scalars['String'],
   Boolean: Scalars['Boolean'],
   Float: Scalars['Float'],
+  Verification: Verification,
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -152,9 +165,20 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
+export type VerificationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Verification'] = ResolversParentTypes['Verification']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  target?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  payload?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  used?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  key?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+};
+
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>,
   User?: UserResolvers<ContextType>,
+  Verification?: VerificationResolvers<ContextType>,
 };
 
 
