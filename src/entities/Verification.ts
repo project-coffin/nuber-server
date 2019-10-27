@@ -14,8 +14,8 @@ import { verificationTarget } from '../types/types'
 class Verification extends BaseEntity {
   @PrimaryGeneratedColumn() id: number
 
-  @Column({ type: 'text', enum: [verificationTarget.PHONE, verificationTarget.EMAIL] })
-  target: verificationTarget.PHONE | verificationTarget.EMAIL
+  @Column({ type: 'text', enum: ['PHONE', 'EMAIL'] })
+  target: verificationTarget
 
   @Column({ type: 'text' })
   payload: string

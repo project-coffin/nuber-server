@@ -26,6 +26,23 @@ export type Query = {
   user?: Maybe<User>,
 };
 
+export type Ride = {
+   __typename?: 'Ride',
+  id: Scalars['Int'],
+  status: Scalars['String'],
+  pickUpAddress: Scalars['String'],
+  pickUpLatitude: Scalars['Float'],
+  pickUpLongitude: Scalars['Float'],
+  dropOffAddress: Scalars['String'],
+  dropOffLattude: Scalars['Float'],
+  dropOffLongitude: Scalars['Float'],
+  price: Scalars['Float'],
+  distance: Scalars['String'],
+  duration: Scalars['String'],
+  createdAt: Scalars['String'],
+  updatedAt?: Maybe<Scalars['String']>,
+};
+
 export type User = {
    __typename?: 'User',
   id: Scalars['Int'],
@@ -138,6 +155,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Float: ResolverTypeWrapper<Scalars['Float']>,
   Place: ResolverTypeWrapper<Place>,
+  Ride: ResolverTypeWrapper<Ride>,
   Verification: ResolverTypeWrapper<Verification>,
 };
 
@@ -150,6 +168,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'],
   Float: Scalars['Float'],
   Place: Place,
+  Ride: Ride,
   Verification: Verification,
 };
 
@@ -166,6 +185,22 @@ export type PlaceResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
+};
+
+export type RideResolvers<ContextType = any, ParentType extends ResolversParentTypes['Ride'] = ResolversParentTypes['Ride']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  status?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  pickUpAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  pickUpLatitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  pickUpLongitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  dropOffAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  dropOffLattude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  dropOffLongitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  distance?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  duration?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -203,6 +238,7 @@ export type VerificationResolvers<ContextType = any, ParentType extends Resolver
 export type Resolvers<ContextType = any> = {
   Place?: PlaceResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
+  Ride?: RideResolvers<ContextType>,
   User?: UserResolvers<ContextType>,
   Verification?: VerificationResolvers<ContextType>,
 };
