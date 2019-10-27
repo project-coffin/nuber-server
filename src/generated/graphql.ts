@@ -9,6 +9,18 @@ export type Scalars = {
   Float: number,
 };
 
+export type Place = {
+   __typename?: 'Place',
+  id: Scalars['Int'],
+  name: Scalars['String'],
+  latitude: Scalars['Float'],
+  longitude: Scalars['Float'],
+  address: Scalars['String'],
+  isFavorite: Scalars['Boolean'],
+  createdAt: Scalars['String'],
+  updatedAt?: Maybe<Scalars['String']>,
+};
+
 export type Query = {
    __typename?: 'Query',
   user?: Maybe<User>,
@@ -45,7 +57,7 @@ export type Verification = {
   used: Scalars['Boolean'],
   key: Scalars['String'],
   createdAt: Scalars['String'],
-  updatedAt: Scalars['String'],
+  updatedAt?: Maybe<Scalars['String']>,
 };
 
 
@@ -125,6 +137,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Float: ResolverTypeWrapper<Scalars['Float']>,
+  Place: ResolverTypeWrapper<Place>,
   Verification: ResolverTypeWrapper<Verification>,
 };
 
@@ -136,7 +149,19 @@ export type ResolversParentTypes = {
   String: Scalars['String'],
   Boolean: Scalars['Boolean'],
   Float: Scalars['Float'],
+  Place: Place,
   Verification: Verification,
+};
+
+export type PlaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Place'] = ResolversParentTypes['Place']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  address?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  isFavorite?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -172,10 +197,11 @@ export type VerificationResolvers<ContextType = any, ParentType extends Resolver
   used?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   key?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type Resolvers<ContextType = any> = {
+  Place?: PlaceResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   User?: UserResolvers<ContextType>,
   Verification?: VerificationResolvers<ContextType>,
