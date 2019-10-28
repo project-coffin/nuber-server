@@ -31,12 +31,13 @@ class Verification extends BaseEntity {
 
   @BeforeInsert()
   createKey(): void {
-    this.key = verificationTarget.PHONE
-      ? Math.floor(Math.random() * 1000000).toString()
-      : // EMAIL인 경우
-        (this.key = Math.random()
-          .toString(36)
-          .substr(2))
+    this.key =
+      this.target === 'PHONE'
+        ? Math.floor(Math.random() * 1000000).toString()
+        : // EMAIL인 경우
+          (this.key = Math.random()
+            .toString(36)
+            .substr(2))
   }
 }
 
