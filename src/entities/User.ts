@@ -7,15 +7,36 @@ import {
   CreateDateColumn,
   Column,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm'
+import Chat from './Chat'
+import Message from './Message'
+import Ride from './Ride'
+import Verification from './Verification'
 
 const BCRYPT_TIMES = 10
 
 @Entity() // Model
 class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number
+
+  @ManyToOne(type => Chat, chat => chat.participants)
+  chat: Chat
+
+  @OneToMany(type => Message, message => message.user)
+  messages: Message[]
+
+  @OneToMany(type => Verification, verification => verification.user)
+  verifications: Verification[]
+
+  @OneToMany(type => Ride, ride => ride.passenger)
+  ridesAsPassenger: Ride[]
+
+  @OneToMany(type => Ride, ride => ride.driver)
+  ridesAsDriver: Ride[]
 
   @Column({ type: 'text', unique: true })
   @IsEmail()

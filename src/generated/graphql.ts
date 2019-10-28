@@ -9,6 +9,25 @@ export type Scalars = {
   Float: number,
 };
 
+export type Chat = {
+   __typename?: 'Chat',
+  id: Scalars['Int'],
+  messages: Array<Maybe<Message>>,
+  participants: Array<Maybe<User>>,
+  createdAt: Scalars['String'],
+  updatedAt?: Maybe<Scalars['String']>,
+};
+
+export type Message = {
+   __typename?: 'Message',
+  id: Scalars['Int'],
+  text: Scalars['String'],
+  chat: Chat,
+  user: User,
+  createdAt: Scalars['String'],
+  updatedAt?: Maybe<Scalars['String']>,
+};
+
 export type Place = {
    __typename?: 'Place',
   id: Scalars['Int'],
@@ -39,6 +58,8 @@ export type Ride = {
   price: Scalars['Float'],
   distance: Scalars['String'],
   duration: Scalars['String'],
+  driver: User,
+  passenger: User,
   createdAt: Scalars['String'],
   updatedAt?: Maybe<Scalars['String']>,
 };
@@ -62,6 +83,11 @@ export type User = {
   lastLng?: Maybe<Scalars['Float']>,
   lastLat?: Maybe<Scalars['Float']>,
   lastOrientation?: Maybe<Scalars['Float']>,
+  chat?: Maybe<Chat>,
+  messages?: Maybe<Array<Maybe<Message>>>,
+  verifications?: Maybe<Array<Maybe<Verification>>>,
+  ridesAsPassenger?: Maybe<Array<Maybe<Ride>>>,
+  ridesAsDriver?: Maybe<Array<Maybe<Ride>>>,
   createdAt: Scalars['String'],
   updatedAt?: Maybe<Scalars['String']>,
 };
@@ -73,6 +99,7 @@ export type Verification = {
   payload: Scalars['String'],
   used: Scalars['Boolean'],
   key: Scalars['String'],
+  user: User,
   createdAt: Scalars['String'],
   updatedAt?: Maybe<Scalars['String']>,
 };
@@ -154,9 +181,11 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Float: ResolverTypeWrapper<Scalars['Float']>,
-  Place: ResolverTypeWrapper<Place>,
-  Ride: ResolverTypeWrapper<Ride>,
+  Chat: ResolverTypeWrapper<Chat>,
+  Message: ResolverTypeWrapper<Message>,
   Verification: ResolverTypeWrapper<Verification>,
+  Ride: ResolverTypeWrapper<Ride>,
+  Place: ResolverTypeWrapper<Place>,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -167,9 +196,28 @@ export type ResolversParentTypes = {
   String: Scalars['String'],
   Boolean: Scalars['Boolean'],
   Float: Scalars['Float'],
-  Place: Place,
-  Ride: Ride,
+  Chat: Chat,
+  Message: Message,
   Verification: Verification,
+  Ride: Ride,
+  Place: Place,
+};
+
+export type ChatResolvers<ContextType = any, ParentType extends ResolversParentTypes['Chat'] = ResolversParentTypes['Chat']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  messages?: Resolver<Array<Maybe<ResolversTypes['Message']>>, ParentType, ContextType>,
+  participants?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>,
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
+export type MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  text?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  chat?: Resolver<ResolversTypes['Chat'], ParentType, ContextType>,
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type PlaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Place'] = ResolversParentTypes['Place']> = {
@@ -199,6 +247,8 @@ export type RideResolvers<ContextType = any, ParentType extends ResolversParentT
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
   distance?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   duration?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  driver?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
+  passenger?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
@@ -221,6 +271,11 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   lastLng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
   lastLat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
   lastOrientation?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
+  chat?: Resolver<Maybe<ResolversTypes['Chat']>, ParentType, ContextType>,
+  messages?: Resolver<Maybe<Array<Maybe<ResolversTypes['Message']>>>, ParentType, ContextType>,
+  verifications?: Resolver<Maybe<Array<Maybe<ResolversTypes['Verification']>>>, ParentType, ContextType>,
+  ridesAsPassenger?: Resolver<Maybe<Array<Maybe<ResolversTypes['Ride']>>>, ParentType, ContextType>,
+  ridesAsDriver?: Resolver<Maybe<Array<Maybe<ResolversTypes['Ride']>>>, ParentType, ContextType>,
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
@@ -231,11 +286,14 @@ export type VerificationResolvers<ContextType = any, ParentType extends Resolver
   payload?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   used?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   key?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type Resolvers<ContextType = any> = {
+  Chat?: ChatResolvers<ContextType>,
+  Message?: MessageResolvers<ContextType>,
   Place?: PlaceResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   Ride?: RideResolvers<ContextType>,
