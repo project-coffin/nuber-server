@@ -21,6 +21,8 @@ type User {
   lastLat: Float
   lastOrientation: Float
 
+  facebookID: String
+
   chat: Chat
   messages: [Message]
   verifications: [Verification]

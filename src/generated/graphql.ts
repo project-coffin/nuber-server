@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -18,6 +19,13 @@ export type Chat = {
   updatedAt?: Maybe<Scalars['String']>,
 };
 
+export type FacebookConnectPayload = {
+   __typename?: 'FacebookConnectPayload',
+  responseStatus: Scalars['Boolean'],
+  error?: Maybe<Scalars['String']>,
+  token?: Maybe<Scalars['String']>,
+};
+
 export type Message = {
    __typename?: 'Message',
   id: Scalars['Int'],
@@ -26,6 +34,19 @@ export type Message = {
   user: User,
   createdAt: Scalars['String'],
   updatedAt?: Maybe<Scalars['String']>,
+};
+
+export type Mutation = {
+   __typename?: 'Mutation',
+  FacebookConnect: FacebookConnectPayload,
+};
+
+
+export type MutationFacebookConnectArgs = {
+  firstName: Scalars['String'],
+  lastName: Scalars['String'],
+  email?: Maybe<Scalars['String']>,
+  facebookID: Scalars['String']
 };
 
 export type Place = {
@@ -83,6 +104,7 @@ export type User = {
   lastLng?: Maybe<Scalars['Float']>,
   lastLat?: Maybe<Scalars['Float']>,
   lastOrientation?: Maybe<Scalars['Float']>,
+  facebookID?: Maybe<Scalars['String']>,
   chat?: Maybe<Chat>,
   messages?: Maybe<Array<Maybe<Message>>>,
   verifications?: Maybe<Array<Maybe<Verification>>>,
@@ -185,6 +207,8 @@ export type ResolversTypes = {
   Message: ResolverTypeWrapper<Message>,
   Verification: ResolverTypeWrapper<Verification>,
   Ride: ResolverTypeWrapper<Ride>,
+  Mutation: ResolverTypeWrapper<{}>,
+  FacebookConnectPayload: ResolverTypeWrapper<FacebookConnectPayload>,
   Place: ResolverTypeWrapper<Place>,
 };
 
@@ -200,6 +224,8 @@ export type ResolversParentTypes = {
   Message: Message,
   Verification: Verification,
   Ride: Ride,
+  Mutation: {},
+  FacebookConnectPayload: FacebookConnectPayload,
   Place: Place,
 };
 
@@ -211,6 +237,12 @@ export type ChatResolvers<ContextType = any, ParentType extends ResolversParentT
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
+export type FacebookConnectPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacebookConnectPayload'] = ResolversParentTypes['FacebookConnectPayload']> = {
+  responseStatus?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
 export type MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = {
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
@@ -218,6 +250,10 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  FacebookConnect?: Resolver<ResolversTypes['FacebookConnectPayload'], ParentType, ContextType, RequireFields<MutationFacebookConnectArgs, 'firstName' | 'lastName' | 'facebookID'>>,
 };
 
 export type PlaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Place'] = ResolversParentTypes['Place']> = {
@@ -271,6 +307,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   lastLng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
   lastLat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
   lastOrientation?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
+  facebookID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   chat?: Resolver<Maybe<ResolversTypes['Chat']>, ParentType, ContextType>,
   messages?: Resolver<Maybe<Array<Maybe<ResolversTypes['Message']>>>, ParentType, ContextType>,
   verifications?: Resolver<Maybe<Array<Maybe<ResolversTypes['Verification']>>>, ParentType, ContextType>,
@@ -293,7 +330,9 @@ export type VerificationResolvers<ContextType = any, ParentType extends Resolver
 
 export type Resolvers<ContextType = any> = {
   Chat?: ChatResolvers<ContextType>,
+  FacebookConnectPayload?: FacebookConnectPayloadResolvers<ContextType>,
   Message?: MessageResolvers<ContextType>,
+  Mutation?: MutationResolvers<ContextType>,
   Place?: PlaceResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   Ride?: RideResolvers<ContextType>,

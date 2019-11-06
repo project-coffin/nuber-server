@@ -38,9 +38,9 @@ class User extends BaseEntity {
   @OneToMany(type => Ride, ride => ride.driver)
   ridesAsDriver: Ride[]
 
-  @Column({ type: 'text', unique: true })
+  @Column({ type: 'text', nullable: true })
   @IsEmail()
-  email: string
+  email: string | null
 
   @Column({ type: 'boolean', default: false })
   verifiedByEmail: boolean
@@ -51,8 +51,8 @@ class User extends BaseEntity {
   @Column({ type: 'text' })
   lastName: string
 
-  @Column({ type: 'int' })
-  age: string
+  @Column({ type: 'int', nullable: true })
+  age: number
 
   @Column({ type: 'text' })
   password: string
@@ -83,6 +83,9 @@ class User extends BaseEntity {
 
   @Column({ type: 'double precision', default: 0 })
   lastOrientation: number
+
+  @Column({ type: 'text', nullable: true })
+  facebookID: string
 
   @CreateDateColumn() createdAt: string
   @UpdateDateColumn() updatedAt: string
