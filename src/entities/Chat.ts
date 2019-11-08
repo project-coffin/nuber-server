@@ -1,11 +1,9 @@
 import {
   BaseEntity,
   CreateDateColumn,
-  Column,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToOne,
   OneToMany,
 } from 'typeorm'
 
@@ -16,10 +14,10 @@ import User from './User'
 class Chat extends BaseEntity {
   @PrimaryGeneratedColumn() id: number
 
-  @OneToMany(type => Message, message => message.chat)
+  @OneToMany(_ => Message, message => message.chat)
   messages: Message[]
 
-  @OneToMany(type => User, user => user.chat)
+  @OneToMany(_ => User, user => user.chat)
   participants: User[]
 
   @CreateDateColumn() createdAt: string
