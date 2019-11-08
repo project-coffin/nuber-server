@@ -1,2 +1,2 @@
 export type verificationTarget = 'PHONE' | 'EMAIL'
-export type rideStatus = 'ACCEPTED' | 'FINISHED' | 'CANCLED' | 'REQUESTED' | 'ONROUTE'
+export type rideStatus = 'ACCEPTED' | 'FINISHED' | 'CANCELED' | 'REQUESTED' | 'ONROUTE'

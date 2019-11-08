@@ -15,8 +15,9 @@ class Ride extends BaseEntity {
   @PrimaryGeneratedColumn() id: number
 
   @Column({
-    type: 'text',
-    enum: ['ACCEPTED', 'CANCLED', 'FINISHED', 'ONROUTE', 'REQUESTED'],
+    type: 'enum',
+    enum: ['ACCEPTED', 'FINISHED', 'CANCELED', 'REQUESTED', 'ONROUTE'],
+    default: 'REQUESTED',
   })
   status: rideStatus
 
@@ -47,10 +48,10 @@ class Ride extends BaseEntity {
   @Column({ type: 'text' })
   duration: string
 
-  @ManyToOne(type => User, user => user.ridesAsPassenger)
+  @ManyToOne(_ => User, user => user.ridesAsPassenger)
   passenger: User
 
-  @ManyToOne(type => User, user => user.ridesAsDriver)
+  @ManyToOne(_ => User, user => user.ridesAsDriver)
   driver: User
 
   @CreateDateColumn() createdAt: string

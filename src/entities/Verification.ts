@@ -16,7 +16,7 @@ import User from './User'
 class Verification extends BaseEntity {
   @PrimaryGeneratedColumn() id: number
 
-  @Column({ type: 'text', enum: ['PHONE', 'EMAIL'] })
+  @Column({ type: 'enum', enum: ['PHONE', 'EMAIL'], default: 'EMAIL' })
   target: verificationTarget
 
   @Column({ type: 'text' })
@@ -28,7 +28,7 @@ class Verification extends BaseEntity {
   @Column({ type: 'boolean', default: false })
   used: boolean
 
-  @ManyToOne(type => User, user => user.verifications)
+  @ManyToOne(_ => User, user => user.verifications)
   user: User
 
   @CreateDateColumn() createdAt: string
