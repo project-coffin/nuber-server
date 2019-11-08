@@ -1,6 +1,6 @@
 type User {
   id: Int!
-  password: String!
+  password: String
 
   age: Int
   firstName: String!
@@ -8,7 +8,7 @@ type User {
   fullName: String
   profilePhoto: String
   email: String
-  phoneNumber: String!
+  phoneNumber: String
 
   verifiedByEmail: Boolean!
   verfiedByPhoneNumber: Boolean!

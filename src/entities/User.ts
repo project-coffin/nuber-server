@@ -23,19 +23,19 @@ const BCRYPT_TIMES = 10
 class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number
 
-  @ManyToOne(type => Chat, chat => chat.participants)
+  @ManyToOne(_ => Chat, chat => chat.participants)
   chat: Chat
 
-  @OneToMany(type => Message, message => message.user)
+  @OneToMany(_ => Message, message => message.user)
   messages: Message[]
 
-  @OneToMany(type => Verification, verification => verification.user)
+  @OneToMany(_ => Verification, verification => verification.user)
   verifications: Verification[]
 
-  @OneToMany(type => Ride, ride => ride.passenger)
+  @OneToMany(_ => Ride, ride => ride.passenger)
   ridesAsPassenger: Ride[]
 
-  @OneToMany(type => Ride, ride => ride.driver)
+  @OneToMany(_ => Ride, ride => ride.driver)
   ridesAsDriver: Ride[]
 
   @Column({ type: 'text', nullable: true })
@@ -54,10 +54,10 @@ class User extends BaseEntity {
   @Column({ type: 'int', nullable: true })
   age: number
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   password: string
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   phoneNumber: string
 
   @Column({ type: 'boolean', default: false })
