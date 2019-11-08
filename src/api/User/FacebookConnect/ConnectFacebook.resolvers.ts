@@ -1,12 +1,13 @@
 import { Resolvers } from 'types/resolvers'
-import { MutationFacebookConnectArgs, FacebookConnectPayload } from 'generated/graphql'
-import User from 'entities/User'
+import { MutationConnectFacebookArgs, FacebookConnectPayload } from 'generated/graphql'
+
+import User from '../../../entities/User'
 
 const resolvers: Resolvers = {
-  mutation: {
-    FacebookConnect: async (
+  Mutation: {
+    ConnectFacebook: async (
       _,
-      args: MutationFacebookConnectArgs,
+      args: MutationConnectFacebookArgs,
     ): Promise<FacebookConnectPayload> => {
       const { facebookID } = args
       try {
@@ -15,7 +16,7 @@ const resolvers: Resolvers = {
           return {
             responseStatus: true,
             error: null,
-            token: 'coming soon',
+            token: 'coming soon | already exists',
           }
         }
       } catch (error) {
@@ -36,7 +37,7 @@ const resolvers: Resolvers = {
         return {
           responseStatus: true,
           error: null,
-          token: 'coming soon',
+          token: 'coming soon | created',
         }
       } catch (error) {
         return {

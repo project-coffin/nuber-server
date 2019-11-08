@@ -38,11 +38,11 @@ export type Message = {
 
 export type Mutation = {
    __typename?: 'Mutation',
-  FacebookConnect: FacebookConnectPayload,
+  ConnectFacebook: FacebookConnectPayload,
 };
 
 
-export type MutationFacebookConnectArgs = {
+export type MutationConnectFacebookArgs = {
   firstName: Scalars['String'],
   lastName: Scalars['String'],
   email?: Maybe<Scalars['String']>,
@@ -88,14 +88,14 @@ export type Ride = {
 export type User = {
    __typename?: 'User',
   id: Scalars['Int'],
-  password: Scalars['String'],
+  password?: Maybe<Scalars['String']>,
   age?: Maybe<Scalars['Int']>,
   firstName: Scalars['String'],
   lastName: Scalars['String'],
   fullName?: Maybe<Scalars['String']>,
   profilePhoto?: Maybe<Scalars['String']>,
   email?: Maybe<Scalars['String']>,
-  phoneNumber: Scalars['String'],
+  phoneNumber?: Maybe<Scalars['String']>,
   verifiedByEmail: Scalars['Boolean'],
   verfiedByPhoneNumber: Scalars['Boolean'],
   isDriving: Scalars['Boolean'],
@@ -253,7 +253,7 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  FacebookConnect?: Resolver<ResolversTypes['FacebookConnectPayload'], ParentType, ContextType, RequireFields<MutationFacebookConnectArgs, 'firstName' | 'lastName' | 'facebookID'>>,
+  ConnectFacebook?: Resolver<ResolversTypes['FacebookConnectPayload'], ParentType, ContextType, RequireFields<MutationConnectFacebookArgs, 'firstName' | 'lastName' | 'facebookID'>>,
 };
 
 export type PlaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Place'] = ResolversParentTypes['Place']> = {
@@ -291,14 +291,14 @@ export type RideResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
-  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>,
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   fullName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   profilePhoto?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
-  phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   verifiedByEmail?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   verfiedByPhoneNumber?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   isDriving?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
