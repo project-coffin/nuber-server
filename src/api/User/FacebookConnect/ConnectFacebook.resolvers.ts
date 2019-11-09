@@ -14,14 +14,14 @@ const resolvers: Resolvers = {
         const existingUser = await User.findOne({ facebookID })
         if (existingUser) {
           return {
-            responseStatus: true,
+            verified: true,
             error: null,
             token: 'coming soon | already exists',
           }
         }
       } catch (error) {
         return {
-          responseStatus: false,
+          verified: false,
           error: error.message,
           token: null,
         }
@@ -35,13 +35,13 @@ const resolvers: Resolvers = {
         }).save()
 
         return {
-          responseStatus: true,
+          verified: true,
           error: null,
           token: 'coming soon | created',
         }
       } catch (error) {
         return {
-          responseStatus: false,
+          verified: false,
           error: error.message,
           token: null,
         }

@@ -1,5 +1,5 @@
 type FacebookConnectPayload {
-  responseStatus: Boolean!
+  verified: Boolean!
   error: String
   token: String # 사용자 인증 후 토큰 부여
 }

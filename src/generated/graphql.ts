@@ -19,9 +19,16 @@ export type Chat = {
   updatedAt?: Maybe<Scalars['String']>,
 };
 
+export type EmailSignInPayload = {
+   __typename?: 'EmailSignInPayload',
+  verified: Scalars['Boolean'],
+  error?: Maybe<Scalars['String']>,
+  token?: Maybe<Scalars['String']>,
+};
+
 export type FacebookConnectPayload = {
    __typename?: 'FacebookConnectPayload',
-  responseStatus: Scalars['Boolean'],
+  verified: Scalars['Boolean'],
   error?: Maybe<Scalars['String']>,
   token?: Maybe<Scalars['String']>,
 };
@@ -38,7 +45,15 @@ export type Message = {
 
 export type Mutation = {
    __typename?: 'Mutation',
+  EmailSignIn: EmailSignInPayload,
   ConnectFacebook: FacebookConnectPayload,
+  StartPhoneVerification: StartPhoneVerificationPayload,
+};
+
+
+export type MutationEmailSignInArgs = {
+  email: Scalars['String'],
+  password: Scalars['String']
 };
 
 
@@ -47,6 +62,11 @@ export type MutationConnectFacebookArgs = {
   lastName: Scalars['String'],
   email?: Maybe<Scalars['String']>,
   facebookID: Scalars['String']
+};
+
+
+export type MutationStartPhoneVerificationArgs = {
+  phoneNumber: Scalars['String']
 };
 
 export type Place = {
@@ -85,6 +105,13 @@ export type Ride = {
   updatedAt?: Maybe<Scalars['String']>,
 };
 
+export type StartPhoneVerificationPayload = {
+   __typename?: 'StartPhoneVerificationPayload',
+  verified: Scalars['Boolean'],
+  error?: Maybe<Scalars['String']>,
+  token?: Maybe<Scalars['String']>,
+};
+
 export type User = {
    __typename?: 'User',
   id: Scalars['Int'],
@@ -107,7 +134,6 @@ export type User = {
   facebookID?: Maybe<Scalars['String']>,
   chat?: Maybe<Chat>,
   messages?: Maybe<Array<Maybe<Message>>>,
-  verifications?: Maybe<Array<Maybe<Verification>>>,
   ridesAsPassenger?: Maybe<Array<Maybe<Ride>>>,
   ridesAsDriver?: Maybe<Array<Maybe<Ride>>>,
   createdAt: Scalars['String'],
@@ -119,9 +145,7 @@ export type Verification = {
   id: Scalars['Int'],
   target: Scalars['String'],
   payload: Scalars['String'],
-  used: Scalars['Boolean'],
   key: Scalars['String'],
-  user: User,
   createdAt: Scalars['String'],
   updatedAt?: Maybe<Scalars['String']>,
 };
@@ -205,11 +229,13 @@ export type ResolversTypes = {
   Float: ResolverTypeWrapper<Scalars['Float']>,
   Chat: ResolverTypeWrapper<Chat>,
   Message: ResolverTypeWrapper<Message>,
-  Verification: ResolverTypeWrapper<Verification>,
   Ride: ResolverTypeWrapper<Ride>,
   Mutation: ResolverTypeWrapper<{}>,
+  EmailSignInPayload: ResolverTypeWrapper<EmailSignInPayload>,
   FacebookConnectPayload: ResolverTypeWrapper<FacebookConnectPayload>,
+  StartPhoneVerificationPayload: ResolverTypeWrapper<StartPhoneVerificationPayload>,
   Place: ResolverTypeWrapper<Place>,
+  Verification: ResolverTypeWrapper<Verification>,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -222,11 +248,13 @@ export type ResolversParentTypes = {
   Float: Scalars['Float'],
   Chat: Chat,
   Message: Message,
-  Verification: Verification,
   Ride: Ride,
   Mutation: {},
+  EmailSignInPayload: EmailSignInPayload,
   FacebookConnectPayload: FacebookConnectPayload,
+  StartPhoneVerificationPayload: StartPhoneVerificationPayload,
   Place: Place,
+  Verification: Verification,
 };
 
 export type ChatResolvers<ContextType = any, ParentType extends ResolversParentTypes['Chat'] = ResolversParentTypes['Chat']> = {
@@ -237,8 +265,14 @@ export type ChatResolvers<ContextType = any, ParentType extends ResolversParentT
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
+export type EmailSignInPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['EmailSignInPayload'] = ResolversParentTypes['EmailSignInPayload']> = {
+  verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
 export type FacebookConnectPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacebookConnectPayload'] = ResolversParentTypes['FacebookConnectPayload']> = {
-  responseStatus?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
@@ -253,7 +287,9 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  EmailSignIn?: Resolver<ResolversTypes['EmailSignInPayload'], ParentType, ContextType, RequireFields<MutationEmailSignInArgs, 'email' | 'password'>>,
   ConnectFacebook?: Resolver<ResolversTypes['FacebookConnectPayload'], ParentType, ContextType, RequireFields<MutationConnectFacebookArgs, 'firstName' | 'lastName' | 'facebookID'>>,
+  StartPhoneVerification?: Resolver<ResolversTypes['StartPhoneVerificationPayload'], ParentType, ContextType, RequireFields<MutationStartPhoneVerificationArgs, 'phoneNumber'>>,
 };
 
 export type PlaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Place'] = ResolversParentTypes['Place']> = {
@@ -289,6 +325,12 @@ export type RideResolvers<ContextType = any, ParentType extends ResolversParentT
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
+export type StartPhoneVerificationPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['StartPhoneVerificationPayload'] = ResolversParentTypes['StartPhoneVerificationPayload']> = {
+  verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
   password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
@@ -310,7 +352,6 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   facebookID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   chat?: Resolver<Maybe<ResolversTypes['Chat']>, ParentType, ContextType>,
   messages?: Resolver<Maybe<Array<Maybe<ResolversTypes['Message']>>>, ParentType, ContextType>,
-  verifications?: Resolver<Maybe<Array<Maybe<ResolversTypes['Verification']>>>, ParentType, ContextType>,
   ridesAsPassenger?: Resolver<Maybe<Array<Maybe<ResolversTypes['Ride']>>>, ParentType, ContextType>,
   ridesAsDriver?: Resolver<Maybe<Array<Maybe<ResolversTypes['Ride']>>>, ParentType, ContextType>,
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
@@ -321,21 +362,21 @@ export type VerificationResolvers<ContextType = any, ParentType extends Resolver
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
   target?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   payload?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  used?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   key?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type Resolvers<ContextType = any> = {
   Chat?: ChatResolvers<ContextType>,
+  EmailSignInPayload?: EmailSignInPayloadResolvers<ContextType>,
   FacebookConnectPayload?: FacebookConnectPayloadResolvers<ContextType>,
   Message?: MessageResolvers<ContextType>,
   Mutation?: MutationResolvers<ContextType>,
   Place?: PlaceResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   Ride?: RideResolvers<ContextType>,
+  StartPhoneVerificationPayload?: StartPhoneVerificationPayloadResolvers<ContextType>,
   User?: UserResolvers<ContextType>,
   Verification?: VerificationResolvers<ContextType>,
 };
