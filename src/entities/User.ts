@@ -15,7 +15,7 @@ import {
 import Chat from './Chat'
 import Message from './Message'
 import Ride from './Ride'
-import Verification from './Verification'
+// import Verification from './Verification'
 
 const BCRYPT_TIMES = 10
 
@@ -29,8 +29,8 @@ class User extends BaseEntity {
   @OneToMany(_ => Message, message => message.user)
   messages: Message[]
 
-  @OneToMany(_ => Verification, verification => verification.user)
-  verifications: Verification[]
+  // @OneToMany(_ => Verification, verification => verification.user)
+  // verifications: Verification[]
 
   @OneToMany(_ => Ride, ride => ride.passenger)
   ridesAsPassenger: Ride[]
