@@ -33,6 +33,13 @@ export type EmailSignInPayload = {
   token?: Maybe<Scalars['String']>,
 };
 
+export type EmailSignUpPayload = {
+   __typename?: 'EmailSignUpPayload',
+  ok: Scalars['Boolean'],
+  error?: Maybe<Scalars['String']>,
+  token?: Maybe<Scalars['String']>,
+};
+
 export type FacebookConnectPayload = {
    __typename?: 'FacebookConnectPayload',
   ok: Scalars['Boolean'],
@@ -54,6 +61,7 @@ export type Mutation = {
    __typename?: 'Mutation',
   CompletePhoneVerification?: Maybe<CompletePhoneVerificationPayload>,
   EmailSignIn: EmailSignInPayload,
+  EmailSignUp: EmailSignUpPayload,
   ConnectFacebook: FacebookConnectPayload,
   StartPhoneVerification: StartPhoneVerificationPayload,
 };
@@ -68,6 +76,15 @@ export type MutationCompletePhoneVerificationArgs = {
 export type MutationEmailSignInArgs = {
   email: Scalars['String'],
   password: Scalars['String']
+};
+
+
+export type MutationEmailSignUpArgs = {
+  firstName: Scalars['String'],
+  lastName: Scalars['String'],
+  email: Scalars['String'],
+  profilePhoto: Scalars['String'],
+  age: Scalars['Int']
 };
 
 
@@ -248,6 +265,7 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>,
   CompletePhoneVerificationPayload: ResolverTypeWrapper<CompletePhoneVerificationPayload>,
   EmailSignInPayload: ResolverTypeWrapper<EmailSignInPayload>,
+  EmailSignUpPayload: ResolverTypeWrapper<EmailSignUpPayload>,
   FacebookConnectPayload: ResolverTypeWrapper<FacebookConnectPayload>,
   StartPhoneVerificationPayload: ResolverTypeWrapper<StartPhoneVerificationPayload>,
   Place: ResolverTypeWrapper<Place>,
@@ -268,6 +286,7 @@ export type ResolversParentTypes = {
   Mutation: {},
   CompletePhoneVerificationPayload: CompletePhoneVerificationPayload,
   EmailSignInPayload: EmailSignInPayload,
+  EmailSignUpPayload: EmailSignUpPayload,
   FacebookConnectPayload: FacebookConnectPayload,
   StartPhoneVerificationPayload: StartPhoneVerificationPayload,
   Place: Place,
@@ -294,6 +313,12 @@ export type EmailSignInPayloadResolvers<ContextType = any, ParentType extends Re
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
+export type EmailSignUpPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['EmailSignUpPayload'] = ResolversParentTypes['EmailSignUpPayload']> = {
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
 export type FacebookConnectPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacebookConnectPayload'] = ResolversParentTypes['FacebookConnectPayload']> = {
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
@@ -312,6 +337,7 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   CompletePhoneVerification?: Resolver<Maybe<ResolversTypes['CompletePhoneVerificationPayload']>, ParentType, ContextType, RequireFields<MutationCompletePhoneVerificationArgs, 'phoneNumber' | 'key'>>,
   EmailSignIn?: Resolver<ResolversTypes['EmailSignInPayload'], ParentType, ContextType, RequireFields<MutationEmailSignInArgs, 'email' | 'password'>>,
+  EmailSignUp?: Resolver<ResolversTypes['EmailSignUpPayload'], ParentType, ContextType, RequireFields<MutationEmailSignUpArgs, 'firstName' | 'lastName' | 'email' | 'profilePhoto' | 'age'>>,
   ConnectFacebook?: Resolver<ResolversTypes['FacebookConnectPayload'], ParentType, ContextType, RequireFields<MutationConnectFacebookArgs, 'firstName' | 'lastName' | 'facebookID'>>,
   StartPhoneVerification?: Resolver<ResolversTypes['StartPhoneVerificationPayload'], ParentType, ContextType, RequireFields<MutationStartPhoneVerificationArgs, 'phoneNumber'>>,
 };
@@ -396,6 +422,7 @@ export type Resolvers<ContextType = any> = {
   Chat?: ChatResolvers<ContextType>,
   CompletePhoneVerificationPayload?: CompletePhoneVerificationPayloadResolvers<ContextType>,
   EmailSignInPayload?: EmailSignInPayloadResolvers<ContextType>,
+  EmailSignUpPayload?: EmailSignUpPayloadResolvers<ContextType>,
   FacebookConnectPayload?: FacebookConnectPayloadResolvers<ContextType>,
   Message?: MessageResolvers<ContextType>,
   Mutation?: MutationResolvers<ContextType>,

@@ -15,6 +15,13 @@ Stack: GraphQL, Typescript, NodeJS
 
 ---
 
+### Authentication:
+
+- [ ] Generate JWT
+- [ ] Verify JWT
+
+---
+
 ### Private Resolvers:
 
 - [ ] Generate JWT
