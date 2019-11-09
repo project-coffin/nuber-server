@@ -19,16 +19,23 @@ export type Chat = {
   updatedAt?: Maybe<Scalars['String']>,
 };
 
+export type CompletePhoneVerificationPayload = {
+   __typename?: 'CompletePhoneVerificationPayload',
+  ok: Scalars['Boolean'],
+  error?: Maybe<Scalars['String']>,
+  token?: Maybe<Scalars['String']>,
+};
+
 export type EmailSignInPayload = {
    __typename?: 'EmailSignInPayload',
-  verified: Scalars['Boolean'],
+  ok: Scalars['Boolean'],
   error?: Maybe<Scalars['String']>,
   token?: Maybe<Scalars['String']>,
 };
 
 export type FacebookConnectPayload = {
    __typename?: 'FacebookConnectPayload',
-  verified: Scalars['Boolean'],
+  ok: Scalars['Boolean'],
   error?: Maybe<Scalars['String']>,
   token?: Maybe<Scalars['String']>,
 };
@@ -45,9 +52,16 @@ export type Message = {
 
 export type Mutation = {
    __typename?: 'Mutation',
+  CompletePhoneVerification?: Maybe<CompletePhoneVerificationPayload>,
   EmailSignIn: EmailSignInPayload,
   ConnectFacebook: FacebookConnectPayload,
   StartPhoneVerification: StartPhoneVerificationPayload,
+};
+
+
+export type MutationCompletePhoneVerificationArgs = {
+  phoneNumber: Scalars['String'],
+  key: Scalars['String']
 };
 
 
@@ -107,7 +121,7 @@ export type Ride = {
 
 export type StartPhoneVerificationPayload = {
    __typename?: 'StartPhoneVerificationPayload',
-  verified: Scalars['Boolean'],
+  ok: Scalars['Boolean'],
   error?: Maybe<Scalars['String']>,
   token?: Maybe<Scalars['String']>,
 };
@@ -123,7 +137,7 @@ export type User = {
   profilePhoto?: Maybe<Scalars['String']>,
   email?: Maybe<Scalars['String']>,
   phoneNumber?: Maybe<Scalars['String']>,
-  verifiedByEmail: Scalars['Boolean'],
+  okByEmail: Scalars['Boolean'],
   verfiedByPhoneNumber: Scalars['Boolean'],
   isDriving: Scalars['Boolean'],
   isRiding: Scalars['Boolean'],
@@ -146,6 +160,7 @@ export type Verification = {
   target: Scalars['String'],
   payload: Scalars['String'],
   key: Scalars['String'],
+  verified: Scalars['Boolean'],
   createdAt: Scalars['String'],
   updatedAt?: Maybe<Scalars['String']>,
 };
@@ -231,6 +246,7 @@ export type ResolversTypes = {
   Message: ResolverTypeWrapper<Message>,
   Ride: ResolverTypeWrapper<Ride>,
   Mutation: ResolverTypeWrapper<{}>,
+  CompletePhoneVerificationPayload: ResolverTypeWrapper<CompletePhoneVerificationPayload>,
   EmailSignInPayload: ResolverTypeWrapper<EmailSignInPayload>,
   FacebookConnectPayload: ResolverTypeWrapper<FacebookConnectPayload>,
   StartPhoneVerificationPayload: ResolverTypeWrapper<StartPhoneVerificationPayload>,
@@ -250,6 +266,7 @@ export type ResolversParentTypes = {
   Message: Message,
   Ride: Ride,
   Mutation: {},
+  CompletePhoneVerificationPayload: CompletePhoneVerificationPayload,
   EmailSignInPayload: EmailSignInPayload,
   FacebookConnectPayload: FacebookConnectPayload,
   StartPhoneVerificationPayload: StartPhoneVerificationPayload,
@@ -265,14 +282,20 @@ export type ChatResolvers<ContextType = any, ParentType extends ResolversParentT
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
+export type CompletePhoneVerificationPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['CompletePhoneVerificationPayload'] = ResolversParentTypes['CompletePhoneVerificationPayload']> = {
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
 export type EmailSignInPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['EmailSignInPayload'] = ResolversParentTypes['EmailSignInPayload']> = {
-  verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type FacebookConnectPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacebookConnectPayload'] = ResolversParentTypes['FacebookConnectPayload']> = {
-  verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
@@ -287,6 +310,7 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  CompletePhoneVerification?: Resolver<Maybe<ResolversTypes['CompletePhoneVerificationPayload']>, ParentType, ContextType, RequireFields<MutationCompletePhoneVerificationArgs, 'phoneNumber' | 'key'>>,
   EmailSignIn?: Resolver<ResolversTypes['EmailSignInPayload'], ParentType, ContextType, RequireFields<MutationEmailSignInArgs, 'email' | 'password'>>,
   ConnectFacebook?: Resolver<ResolversTypes['FacebookConnectPayload'], ParentType, ContextType, RequireFields<MutationConnectFacebookArgs, 'firstName' | 'lastName' | 'facebookID'>>,
   StartPhoneVerification?: Resolver<ResolversTypes['StartPhoneVerificationPayload'], ParentType, ContextType, RequireFields<MutationStartPhoneVerificationArgs, 'phoneNumber'>>,
@@ -326,7 +350,7 @@ export type RideResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type StartPhoneVerificationPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['StartPhoneVerificationPayload'] = ResolversParentTypes['StartPhoneVerificationPayload']> = {
-  verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
@@ -341,7 +365,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   profilePhoto?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
-  verifiedByEmail?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  okByEmail?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   verfiedByPhoneNumber?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   isDriving?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   isRiding?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
@@ -363,12 +387,14 @@ export type VerificationResolvers<ContextType = any, ParentType extends Resolver
   target?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   payload?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   key?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type Resolvers<ContextType = any> = {
   Chat?: ChatResolvers<ContextType>,
+  CompletePhoneVerificationPayload?: CompletePhoneVerificationPayloadResolvers<ContextType>,
   EmailSignInPayload?: EmailSignInPayloadResolvers<ContextType>,
   FacebookConnectPayload?: FacebookConnectPayloadResolvers<ContextType>,
   Message?: MessageResolvers<ContextType>,
