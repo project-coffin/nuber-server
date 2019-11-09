@@ -1,9 +1,8 @@
-// TODO: replace twilio to facebook account kit
 import Twilio from 'twilio'
 
-const twilioClient = new Twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN)
+const twilioClient = Twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN)
 
-const sendSMS = (to: string, body: string) => {
+export const sendSMS = (to: string, body: string) => {
   return twilioClient.messages.create({
     body,
     to, // phoneNumber
@@ -12,4 +11,4 @@ const sendSMS = (to: string, body: string) => {
 }
 
 export const sendVerificationSMS = (to: string, key: string) =>
-  sendSMS(to, `Your verification key is ${key}`)
+  sendSMS(to, `TEST: NUBER 인증 번호는 ${key}입니다.`)

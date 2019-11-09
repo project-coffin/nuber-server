@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec ts-node src/entry.ts -e ts,graphql",
-    "lint": "eslint src/server.ts",
+    "lint": "eslint src/app.ts",
     "gqlgen": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
@@ -16,9 +16,11 @@
     "@graphql-codegen/typescript-resolvers": "^1.8.2",
     "@types/bcrypt": "^3.0.0",
     "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.2",
     "@types/helmet": "^0.0.44",
     "@types/morgan": "^1.7.37",
     "@types/node": "^12.7.12",
+    "@types/twilio": "^0.0.10",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
     "babel-runtime": "^6.26.0",
@@ -48,6 +50,7 @@
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "react-facebook-account-kit": "^0.1.5",
+    "twilio": "^3.37.0",
     "typeorm": "^0.2.20"
   },
   "eslintConfig": {

@@ -1,10 +1,10 @@
 import { Resolvers } from '../../../types/resolvers'
 import { MutationEmailSignInArgs, EmailSignInPayload } from 'generated/graphql'
-import User from 'entities/User'
+import User from '../../../entities/User'
 
 const resolvers: Resolvers = {
   Mutation: {
-    EmailSigIn: async (_, args: MutationEmailSignInArgs): Promise<EmailSignInPayload> => {
+    EmailSignIn: async (_, args: MutationEmailSignInArgs): Promise<EmailSignInPayload> => {
       try {
         const { email, password } = args
         const user = await User.findOne({ email })

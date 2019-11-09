@@ -10,6 +10,7 @@ Stack: GraphQL, Typescript, NodeJS
 - [x] Sign Up with Facebook
 - [x] Sign In with Email
 - [ ] Sign Up with Email
+- [x] Phone Number Verification: send SMS
 - [ ] Phone Number Verification
 
 ---

@@ -3,8 +3,8 @@ import {
   MutationStartPhoneVerificationArgs,
   StartPhoneVerificationPayload,
 } from 'generated/graphql'
-import Verification from 'entities/Verification'
-import { sendVerificationSMS } from 'utils/sendSMS'
+import Verification from '../../../entities/Verification'
+import { sendVerificationSMS } from '../../../utils/sendSMS'
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -26,7 +26,6 @@ const resolvers: Resolvers = {
           target: 'PHONE',
         }).save()
 
-        // TODO: replace twilio to facebook account kit
         await sendVerificationSMS(newVerification.payload, newVerification.key)
 
         return {
