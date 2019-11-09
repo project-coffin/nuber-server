@@ -1,4 +1,4 @@
-import { Resolvers } from 'types/resolvers'
+import { Resolvers } from '../../../types/resolvers'
 import { MutationConnectFacebookArgs, FacebookConnectPayload } from 'generated/graphql'
 
 import User from '../../../entities/User'
@@ -14,14 +14,14 @@ const resolvers: Resolvers = {
         const existingUser = await User.findOne({ facebookID })
         if (existingUser) {
           return {
-            verified: true,
+            ok: true,
             error: null,
             token: 'coming soon | already exists',
           }
         }
       } catch (error) {
         return {
-          verified: false,
+          ok: false,
           error: error.message,
           token: null,
         }
@@ -35,13 +35,13 @@ const resolvers: Resolvers = {
         }).save()
 
         return {
-          verified: true,
+          ok: true,
           error: null,
           token: 'coming soon | created',
         }
       } catch (error) {
         return {
-          verified: false,
+          ok: false,
           error: error.message,
           token: null,
         }

@@ -10,7 +10,7 @@ type User {
   email: String
   phoneNumber: String
 
-  verifiedByEmail: Boolean!
+  okByEmail: Boolean!
   verfiedByPhoneNumber: Boolean!
 
   isDriving: Boolean!
@@ -25,7 +25,6 @@ type User {
 
   chat: Chat
   messages: [Message]
-  # verifications: [Verification]
 
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]

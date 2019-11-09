@@ -29,12 +29,12 @@ const resolvers: Resolvers = {
         await sendVerificationSMS(newVerification.payload, newVerification.key)
 
         return {
-          verified: true,
+          ok: true,
           error: null,
         }
       } catch (error) {
         return {
-          verified: false,
+          ok: false,
           error: error.message,
         }
       }

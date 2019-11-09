@@ -11,7 +11,7 @@ const resolvers: Resolvers = {
 
         if (!user) {
           return {
-            verified: false,
+            ok: false,
             error: 'No user with that email',
             token: null,
           }
@@ -21,20 +21,20 @@ const resolvers: Resolvers = {
 
         if (isMatched) {
           return {
-            verified: true,
+            ok: true,
             error: null,
             token: 'coming soon',
           }
         } else {
           return {
-            verified: false,
+            ok: false,
             error: 'Wrong password',
             token: null,
           }
         }
       } catch (error) {
         return {
-          verified: false,
+          ok: false,
           error: error.message,
           token: null,
         }

@@ -15,7 +15,6 @@ import {
 import Chat from './Chat'
 import Message from './Message'
 import Ride from './Ride'
-// import Verification from './Verification'
 
 const BCRYPT_TIMES = 10
 
@@ -29,9 +28,6 @@ class User extends BaseEntity {
   @OneToMany(_ => Message, message => message.user)
   messages: Message[]
 
-  // @OneToMany(_ => Verification, verification => verification.user)
-  // verifications: Verification[]
-
   @OneToMany(_ => Ride, ride => ride.passenger)
   ridesAsPassenger: Ride[]
 
@@ -43,7 +39,7 @@ class User extends BaseEntity {
   email: string | null
 
   @Column({ type: 'boolean', default: false })
-  verifiedByEmail: boolean
+  okByEmail: boolean
 
   @Column({ type: 'text' })
   firstName: string
@@ -61,7 +57,7 @@ class User extends BaseEntity {
   phoneNumber: string
 
   @Column({ type: 'boolean', default: false })
-  verifiedByPhoneNumber: boolean
+  verfiedByPhoneNumber: boolean
 
   @Column({ type: 'text' })
   profilePhoto: string
