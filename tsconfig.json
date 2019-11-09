@@ -31,5 +31,5 @@
     "baseUrl": "src"
   },
   "exclude": ["dist"],
-  "include": ["**/*.ts", "**/*.tsx", "src/style/main.tsx", "src/index.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "src/style/main.tsx", "src/entry.ts"]
 }
