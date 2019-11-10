@@ -1,0 +1,14 @@
+type FacebookConnectPayload {
+  ok: Boolean!
+  error: String
+  token: String # 사용자 인증 후 토큰 부여
+}
+
+type Mutation {
+  ConnectFacebook(
+    firstName: String!
+    lastName: String!
+    email: String
+    facebookID: String!
+  ): FacebookConnectPayload!
+}

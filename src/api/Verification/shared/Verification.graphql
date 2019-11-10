@@ -1,0 +1,14 @@
+# 사용자 email, phoneNumber를 인증할 때,
+# verification 정보를 db에 만들기 위해 생성된 파일
+
+type Verification {
+  id: Int!
+  target: String!
+  payload: String!
+  key: String!
+  # user: User!
+
+  verified: Boolean!
+  createdAt: String!
+  updatedAt: String
+}

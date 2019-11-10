@@ -1,0 +1,9 @@
+type UserProfilePayload {
+  ok: Boolean!
+  user: User
+  error: String
+}
+
+type Query {
+  UserProfile: UserProfilePayload!
+}
