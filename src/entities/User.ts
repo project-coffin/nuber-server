@@ -39,7 +39,7 @@ class User extends BaseEntity {
   email: string | null
 
   @Column({ type: 'boolean', default: false })
-  okByEmail: boolean
+  verifiedByEmail: boolean
 
   @Column({ type: 'text' })
   firstName: string

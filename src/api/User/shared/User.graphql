@@ -10,7 +10,7 @@ type User {
   email: String
   phoneNumber: String
 
-  okByEmail: Boolean!
+  verifiedByEmail: Boolean!
   verfiedByPhoneNumber: Boolean!
 
   isDriving: Boolean!
