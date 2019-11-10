@@ -1,6 +1,7 @@
 import { Resolvers } from '../../../types/resolvers'
 import { EmailSignUpPayload, MutationEmailSignUpArgs } from 'generated/graphql'
 import User from '../../../entities/User'
+import createJWT from '../../../utils/createJWT'
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -17,11 +18,11 @@ const resolvers: Resolvers = {
             token: null,
           }
         } else {
-          await User.create({ ...args }).save()
+          const newUser = await User.create({ ...args }).save()
           return {
             ok: true,
             error: null,
-            token: 'coming soon',
+            token: createJWT(newUser.id),
           }
         }
       } catch (error) {

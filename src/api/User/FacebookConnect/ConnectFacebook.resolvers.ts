@@ -2,6 +2,7 @@ import { Resolvers } from '../../../types/resolvers'
 import { MutationConnectFacebookArgs, FacebookConnectPayload } from 'generated/graphql'
 
 import User from '../../../entities/User'
+import createJWT from '../../../utils/createJWT'
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -16,7 +17,7 @@ const resolvers: Resolvers = {
           return {
             ok: true,
             error: null,
-            token: 'coming soon | already exists',
+            token: createJWT(existingUser.id),
           }
         }
       } catch (error) {
@@ -29,7 +30,7 @@ const resolvers: Resolvers = {
 
       try {
         // create new user
-        await User.create({
+        const newUser = await User.create({
           ...args,
           profilePhoto: `http://graph.facebook.com/${facebookID}/picture?type=square`,
         }).save()
@@ -37,7 +38,7 @@ const resolvers: Resolvers = {
         return {
           ok: true,
           error: null,
-          token: 'coming soon | created',
+          token: createJWT(newUser.id),
         }
       } catch (error) {
         return {

@@ -5,6 +5,7 @@ import {
 } from 'generated/graphql'
 import Verification from '../../../entities/Verification'
 import User from '../../../entities/User'
+import createJWT from '../../../utils/createJWT'
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -50,13 +51,14 @@ const resolvers: Resolvers = {
           return {
             ok: true,
             error: null,
-            token: 'coming soon',
+            token: createJWT(user.id),
           }
         } else {
           // phone number is verified, but the user is new person.
           return {
             ok: true,
             error: null,
+            token: null,
           }
         }
       } catch (error) {
