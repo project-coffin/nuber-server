@@ -9,15 +9,15 @@ Stack: GraphQL, Typescript, NodeJS
 - [x] Sign In with Facebook
 - [x] Sign Up with Facebook
 - [x] Sign In with Email
-- [ ] Sign Up with Email
+- [x] Sign Up with Email
 - [x] Phone Number Verification: send SMS
-- [ ] Phone Number Verification
+- [x] Phone Number Verification: complete verification
 
 ---
 
 ### Authentication:
 
-- [ ] Generate JWT
+- [x] Generate JWT
 - [ ] Verify JWT
 
 ---
